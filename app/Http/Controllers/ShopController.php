@@ -63,22 +63,22 @@ class ShopController extends Controller
 
     public function nearest(Request $request, string $postcode, ?int $metres = 5000)
     {   
+        
         // get the coordinates of the passed postcode
-        // loop through shops calcating distance from postcode coordinates.
-        // build collection of near shops
-
         if(!$postcode = $this->postcodeRepository->findPostcodeByCode($postcode)) {
             return response()->json(['message' => 'Postcode not found'], 404);
         }
-
+        
         $shops = $this->shopRepository->getAllShops();
-
+        
+        // loop through shops calcating distance from postcode coordinates.
         $nearestShops = LazyCollection::make(function () use ($shops, $postcode, $metres) {
             foreach($shops as $shop) {
                 $distanceInMetres = $this->coordinateHelper->distanceBetweenCoordinates(
                     $shop['latitude'], $shop['longitude'], $postcode['latitude'], $postcode['longitude']
                 );
-
+                
+                // build collection of near shops
                 if ($distanceInMetres < $metres) {
                     $shop['distanceFromPostcode'] = ceil($distanceInMetres);
                     yield $shop;
@@ -93,10 +93,6 @@ class ShopController extends Controller
 
     public function deliverTo(Request $request, string $postcode)
     {   
-        // get the coordinates of the passed postcode
-        // loop through shops calcating distance from postcode coordinates.
-        // build collection of near shops
-
         if(!$postcode = $this->postcodeRepository->findPostcodeByCode($postcode)) {
             return response()->json(['message' => 'Postcode not found'], 404);
         }

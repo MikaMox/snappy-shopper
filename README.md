@@ -131,4 +131,7 @@ The create shop endpoint does some basic validation of inputs.  But it doesn't s
 
 The import postcode command uses the single csv with all postcodes.  While this works fine it could have been changed to use the files that are separated by area, so as not to try loading too large a file.  Though with the generator function it will parse the entire file.
 
-I should have probably created unit tests.  I didn't get around to it.
+Shop types should be a lookup table with defined types.
+
+
+I should have probably created unit tests.  I didn't get around to it.  Also more error handling would be useful.
