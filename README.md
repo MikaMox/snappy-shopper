@@ -109,6 +109,18 @@ Below are 3 shops that I used for testing.  Shop 3 is 0 metres from `AB13PX` the
     "type": "grocery",
     "max_delivery_distance": 10000
 }
-
-
 ```
+
+## Implementation Notes
+The main controller is the ShopController.php.  This is where all the routes are pointing.  A couple of repository services have been registered, these are the postcode and shop repositories. I have also created CoordinateHelper class that has a method for calculating the distance on a globe between two sets of decimal coordinates.  I can't take credit for this calculation as I had to look it up.  
+
+### Improvements and Considerations
+There are a few different things that I have considered when building this. 
+
+The first obvious thing is that that these endpoints do not provided any security.  I started looking into adding a user auth middleware, but considered it out of scope.
+
+The create shop endpoint does some basic validation of inputs.  But it doesn't stop duplicates being added
+
+The import postcode command uses the single csv with all postcodes.  While this works fine it could have been changed to use the files that are separated by area, so as not to try loading too large a file.  Though with the generator function it will parse the entire file.
+
+I should have probably created unit tests.  I didn't get around to it.
