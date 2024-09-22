@@ -8,6 +8,11 @@ The purpose of this code is to fulfill the following requirements
 
 ## Installation
 
+First a you will be required to install the components using
+```
+composer install
+```
+
 The database is a sqlite database, which can be initiated using 
 
 ```
@@ -42,7 +47,10 @@ The total rows to import.  The file is a large csv and this allows us to insert 
 
 ## Endpoints
 
-There are 4 endpoints that have been implemented that can be accessed on localhost.
+There are 4 endpoints that have been implemented that can be accessed on localhost.  For which you will need to start the local dev environment using 
+```
+php artisan serve
+```
 
 The first endpoint creates a shop. The delivery distance is in metres.  This will return the new shop record with the generated UUID.
 
